@@ -1,0 +1,80 @@
+﻿
+@model Pagini<ProgramareProiect.Models.Camera>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by title: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table",style='border:1px solid black'>
+    <thead>
+        <tr style="background-color: burlywood">
+            <th style="border:1px solid black">
+                CameraID
+            </th>
+            <th style="border:1px solid black">
+                Etaj
+            </th>
+            <th style="border:1px solid black">
+                <a asp-action="Index" asp-route-Sortare="@ViewData["TipPatSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">TipPat</a>
+            </th>
+            <th style="border:1px solid black">
+                <a asp-action="Index" asp-route-Sortare="@ViewData["PretNoapteSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">PretNoapte</a>
+            </th>
+            <th style="border:1px solid black"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: burlywood">
+                <td style="border:1px solid black">
+                    @Html.DisplayFor(modelItem => item.CameraID)
+                </td>
+                <td style="border:1px solid black">
+                    @Html.DisplayFor(modelItem => item.Etaj)
+                </td>
+                <td style="border:1px solid black">
+                    @Html.DisplayFor(modelItem => item.TipPat)
+                </td>
+                <td style="border:1px solid black">
+                    @Html.DisplayFor(modelItem => item.PretNoapte)
+                </td>
+                <td style="border:1px solid black">
+                    <a asp-action="Edit" asp-route-id="@item.CameraID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CameraID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CameraID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-Sortare="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-Sortare="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

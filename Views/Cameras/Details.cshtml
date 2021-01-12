@@ -1,0 +1,64 @@
+﻿@model ProgramareProiect.Models.Camera
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Camera</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CameraID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CameraID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Etaj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Etaj)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipPat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipPat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PretNoapte)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PretNoapte)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervari)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Nume Client</th>
+                    <th>Data</th>
+                </tr>
+                @foreach (var item in Model.Rezervari)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.NumeClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRezervare)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CameraID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

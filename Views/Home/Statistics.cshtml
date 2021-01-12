@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProgramareProiect.Models.LibraryViewModels.RezervareGrup>
+@{
+    ViewData["Title"] = "Statistica Camere rezervate";
+}
+<h2 style="color:blue">Statistica Camere rezervate</h2>
+
+<table style='border:1px solid black'>
+    <tr style="background-color: orangered">
+        <th style="border:1px solid black", align="center">
+            Data Rezervare
+        </th>
+        <th style="border:1px solid black", align="center">
+            Camere Rezervate
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="border:1px solid black">
+            <td style="border:1px solid black">
+                @Html.DisplayFor(modelItem => item.DataRezervare)
+            </td>
+            <td style="border:1px solid black">
+                @item.NumarCamera
+            </td>
+        </tr>
+    }
+</table>
